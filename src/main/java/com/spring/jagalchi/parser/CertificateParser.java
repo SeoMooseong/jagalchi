@@ -24,7 +24,7 @@ import com.spring.jagalchi.model.CertificateModel;
 import org.json.*;
 
 public class CertificateParser {
-	String oracleURL = "jdbc:oracle:thin:@localhost:1521:xe";
+	String oracleURL = "jdbc:oracle:thin:@localhost:1521:orcl";
 	//String oracleURL = "jdbc:oracle:thin:@192.168.0.21:1521:xe";
 	String id="scott";
 	String pass = "tiger";
@@ -64,7 +64,7 @@ public class CertificateParser {
 			
 			for(int i = 0 ; i < item.size() ; i++) {
 				
-				if(i < 600) {
+				if(i < 598) {
 					continue;
 				}
 				String jmcd =	((JSONObject)item.get(i)).get("jmcd").toString();
