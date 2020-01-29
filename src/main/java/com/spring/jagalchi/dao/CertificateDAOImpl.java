@@ -22,6 +22,7 @@ public class CertificateDAOImpl implements CertificateDAO{
 		
 		CertificateDAO mapper = sqlSession.getMapper(CertificateDAO.class);
 		arr = mapper.selectCertiByDate(sdate, edate);
+
 		return arr;
 	}
 	@Override

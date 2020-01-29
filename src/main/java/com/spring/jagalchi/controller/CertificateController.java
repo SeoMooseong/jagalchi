@@ -43,10 +43,12 @@ public class CertificateController {
 		String sdate = request.getParameter("sdate");
 		String edate = request.getParameter("edate");
 		String flag = request.getParameter("flag");
+		
 		if(flag == null) return null;
 		
 		response.setCharacterEncoding("utf-8");
 		ArrayList<CDTO> cdtos = null;
+		
 		if(flag.equals("1")) {
 			cdtos = cdao.selectCertiByDate(sdate, edate);
 		}
