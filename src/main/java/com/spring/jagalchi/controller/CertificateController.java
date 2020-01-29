@@ -42,14 +42,17 @@ public class CertificateController {
 	public @ResponseBody List<CDTO> certificate(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
 		String sdate = request.getParameter("sdate");
 		String edate = request.getParameter("edate");
+		String flag = request.getParameter("flag");
+		if(flag == null) return null;
+		
 		response.setCharacterEncoding("utf-8");
-		ArrayList<CDTO> cdtos = cdao.selectCertiByDate("20200101", "20200231");
-		System.out.println(sdate);System.out.println(edate);
-		for(int i = 0 ; i < cdtos.size() ; i++) {
-			//System.out.println(cdto.get(i));
+		ArrayList<CDTO> cdtos = null;
+		if(flag.equals("1")) {
+			cdtos = cdao.selectCertiByDate(sdate, edate);
 		}
-		//System.out.println(cdto);
-		model.addAttribute("serverTime", "call certificate" );
+		else {
+			cdtos = cdao.selectCertiByRegDate(sdate, edate);
+		}
 		
 		return cdtos;
 	}
