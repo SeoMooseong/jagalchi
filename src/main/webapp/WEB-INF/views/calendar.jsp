@@ -13,76 +13,6 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
     <script>
-        var data = [{"seriesCd" : "21", //계열코드
-            "jmfldnm" : "가스기술사", //종목명
-            "description" : "2020년도1회1차", //회차
-            "EXAM_REG_START_DT" : "20200103", //원서접수시작일자
-            "EXAM_REG_END_DT" : "20200109", //원서접수종료일자
-            "EXAM_START_DT" : "20200321", //시험시작일자
-            "EXAM_END_DT" : "20200321", //시험종료일자
-            "PASS_START_DT" : "20200324", //합격자발표시작일자
-            "PASS_END_DT" : "20200324", //합격자발표종료일자
-        },
-            {"seriesCd" : "22", //계열코드
-                "jmfldnm" : "정보처리기사", //종목명
-                "description" : "2020년도1회1차", //회차
-                "EXAM_REG_START_DT" : "20200105", //원서접수시작일자
-                "EXAM_REG_END_DT" : "202001012", //원서접수종료일자
-                "EXAM_START_DT" : "20200305", //시험시작일자
-                "EXAM_END_DT" : "20200305", //시험종료일자
-                "PASS_START_DT" : "20200325", //합격자발표시작일자
-                "PASS_END_DT" : "20200325", //합격자발표종료일자
-            },
-            {"seriesCd" : "23", //계열코드
-                "jmfldnm" : "정보보안기사", //종목명
-                "description" : "2020년도1회1차", //회차
-                "EXAM_REG_START_DT" : "20200113", //원서접수시작일자
-                "EXAM_REG_END_DT" : "20200119", //원서접수종료일자
-                "EXAM_START_DT" : "20200219", //시험시작일자
-                "EXAM_END_DT" : "20200219", //시험종료일자
-                "PASS_START_DT" : "20200323", //합격자발표시작일자
-                "PASS_END_DT" : "20200323", //합격자발표종료일자
-            },
-            {"seriesCd" : "22", //계열코드
-                "jmfldnm" : "보건복지기사", //종목명
-                "description" : "2020년도1회1차", //회차
-                "EXAM_REG_START_DT" : "20200105", //원서접수시작일자
-                "EXAM_REG_END_DT" : "202001012", //원서접수종료일자
-                "EXAM_START_DT" : "20200305", //시험시작일자
-                "EXAM_END_DT" : "20200305", //시험종료일자
-                "PASS_START_DT" : "20200325", //합격자발표시작일자
-                "PASS_END_DT" : "20200325", //합격자발표종료일자
-            },
-            {"seriesCd" : "22", //계열코드
-                "jmfldnm" : "미용사", //종목명
-                "description" : "2020년도1회1차", //회차
-                "EXAM_REG_START_DT" : "20200105", //원서접수시작일자
-                "EXAM_REG_END_DT" : "202001012", //원서접수종료일자
-                "EXAM_START_DT" : "20200305", //시험시작일자
-                "EXAM_END_DT" : "20200305", //시험종료일자
-                "PASS_START_DT" : "20200325", //합격자발표시작일자
-                "PASS_END_DT" : "20200325", //합격자발표종료일자
-            },
-            {"seriesCd" : "22", //계열코드
-                "jmfldnm" : "타투전문가", //종목명
-                "description" : "2020년도1회1차", //회차
-                "EXAM_REG_START_DT" : "20200105", //원서접수시작일자
-                "EXAM_REG_END_DT" : "202001012", //원서접수종료일자
-                "EXAM_START_DT" : "20200305", //시험시작일자
-                "EXAM_END_DT" : "20200305", //시험종료일자
-                "PASS_START_DT" : "20200325", //합격자발표시작일자
-                "PASS_END_DT" : "20200325", //합격자발표종료일자
-            },
-            {"seriesCd" : "22", //계열코드
-                "jmfldnm" : "싱어송라이터", //종목명
-                "description" : "2020년도1회1차", //회차
-                "EXAM_REG_START_DT" : "20200105", //원서접수시작일자
-                "EXAM_REG_END_DT" : "202001012", //원서접수종료일자
-                "EXAM_START_DT" : "20200305", //시험시작일자
-                "EXAM_END_DT" : "20200305", //시험종료일자
-                "PASS_START_DT" : "20200325", //합격자발표시작일자
-                "PASS_END_DT" : "20200325", //합격자발표종료일자
-            }];
         window.onload = function(){
             /*
             | ------------------------------------------------------------------------------
@@ -157,7 +87,6 @@
                     var datetime = this.options.datetime.clone(),
                         month = datetime.month();
                     datetime.startOf('month').startOf('week');
-                    console.log(datetime)
                     var $view = $(this.view),
                         table = document.createElement('table'),
                         thead = document.createElement('thead'),
@@ -188,12 +117,11 @@
                     var edate = datetime.add(41, 'day').format('YYYYMMDD');
                     var today = moment(new Date()).format('YYYYMMDD');
                     datetime.add(-41, 'day');
-
+					
                     while (week < 6) {
                         tr = document.createElement('tr');
                         tr.className = 'calendar-month-row';
                         for (i = 0; i < 7; i++) {
-                            console.log(datetime.format('D') + "->" + datetime);
                             td = document.createElement('td');
                             td.appendChild(document.createTextNode(datetime.format('D')));
                             div = document.createElement('div');
@@ -226,19 +154,34 @@
                             this.options.datetime.format(this.options.monthFormat)
                         );
                     }
-
                     if(this.options.filter == "exam"){ //통신이 이루어져야함
-                        for(i = 0; i < data.length; i++){
-                            tmp = $('#' + data[i].EXAM_START_DT);
-                            tmp.append("<div>" + data[i].jmfldnm + "</div>");
-                        }
+                    	$.get("selectCertiByDate", {
+                       		"sdate" : sdate,
+                       		"edate" : edate,
+                       		"flag" : "1"
+                        },
+                        function(data, status){
+                        	console.log(data)
+                        	for(i = 0; i < data.length; i++){
+                                tmp = $('#' + data[i].examstartdt);
+                                tmp.append("<div class='" + data[i].jmcd + " calendar-date-onclick'><span data-toggle='modal' data-target='#myModal'>" + data[i].jmfldnm + "</span></div>");
+                            }
+                        });
                     }else{
-                        for(i = 0; i < data.length; i++){
-                            tmp = $('#' + data[i].EXAM_REG_START_DT);
-                            tmp.append("<div>" + data[i].jmfldnm + "</div>");
-                            tmp = $('#' + data[i].EXAM_REG_END_DT);
-                            tmp.append("<div>" + data[i].jmfldnm + "</div>");
-                        }
+                    	$.get("selectCertiByDate", {
+                       		"sdate" : sdate,
+                       		"edate" : edate,
+                       		"flag" : "2"
+                        },
+                        function(data, status){
+                        	for(i = 0; i < data.length; i++){
+                                tmp = $('#' + data[i].examregstartdt);
+                                tmp.append("<div class='" + data[i].jmcd + " calendar-date-onclick'><span data-toggle='modal' data-target='#myModal'>" + data[i].jmfldnm + "</span></div>");
+                                tmp = $('#' + data[i].examregenddt);
+                                tmp.append("<div class='" + data[i].jmcd + " calendar-date-onclick'><span data-toggle='modal' data-target='#myModal'>" + data[i].jmfldnm + "</span></div>");
+                            }
+                        });
+                        
                     }
 
                 }
@@ -356,21 +299,21 @@
             overflow-y: auto;
         }
         /* width */
-        .calendar-month-row-data::-webkit-scrollbar {
+        ::-webkit-scrollbar {
             width: 2px;
         }
         /* Track */
-        .calendar-month-row-data::-webkit-scrollbar-track {
+        ::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
 
         /* Handle */
-        .calendar-month-row-data::-webkit-scrollbar-thumb {
+        ::-webkit-scrollbar-thumb {
             background: #888;
         }
 
         /* Handle on hover */
-        .calendar-month-row-data::-webkit-scrollbar-thumb:hover {
+        ::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
         .calendar-other-months-date {
@@ -392,6 +335,12 @@
         }
         .calendar-month-today{
             border: 2px rgba(238, 11, 3, .51) solid !important;
+        }
+        .calendar-month-row-data{
+        	font-size:11px;
+        }
+        .calendar-date-onclick span{
+        	cursor: pointer;
         }
     </style>
 </head>
@@ -435,5 +384,6 @@
         </div>
     </div>
 </div>
+<jsp:include page="detail.jsp"></jsp:include>
 </body>
 </html>
