@@ -43,10 +43,12 @@ public class CertificateController {
 		String sdate = request.getParameter("sdate");
 		String edate = request.getParameter("edate");
 		String flag = request.getParameter("flag");
+		
 		if(flag == null) return null;
 		
 		response.setCharacterEncoding("utf-8");
 		ArrayList<CDTO> cdtos = null;
+		
 		if(flag.equals("1")) {
 			cdtos = cdao.selectCertiByDate(sdate, edate);
 		}
@@ -59,11 +61,15 @@ public class CertificateController {
 	
 	@RequestMapping(value = "/selectCertiByCode", method = RequestMethod.GET)
 	public @ResponseBody List<CDTO> selectCertiByCode(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
-
+		System.out.println("selectCertiByCode");
 		String code = request.getParameter("code");
 		response.setCharacterEncoding("utf-8");
 		ArrayList<CDTO> cdtos = null;
 		cdtos = cdao.selectCertiByCode(code);
+		
+		for(int i = 0 ; i < cdtos.size() ; i++) {
+			System.out.println(cdtos.get(i));
+		}
 		return cdtos;
 	}
 }

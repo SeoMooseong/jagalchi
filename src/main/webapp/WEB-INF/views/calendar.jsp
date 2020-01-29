@@ -13,77 +13,10 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
     <script>
-        var data = [{"seriesCd" : "21", //계열코드
-            "jmfldnm" : "가스기술사", //종목명
-            "description" : "2020년도1회1차", //회차
-            "EXAM_REG_START_DT" : "20200103", //원서접수시작일자
-            "EXAM_REG_END_DT" : "20200109", //원서접수종료일자
-            "EXAM_START_DT" : "20200321", //시험시작일자
-            "EXAM_END_DT" : "20200321", //시험종료일자
-            "PASS_START_DT" : "20200324", //합격자발표시작일자
-            "PASS_END_DT" : "20200324", //합격자발표종료일자
-        },
-        {"seriesCd" : "22", //계열코드
-            "jmfldnm" : "정보처리기사", //종목명
-            "description" : "2020년도1회1차", //회차
-            "EXAM_REG_START_DT" : "20200105", //원서접수시작일자
-            "EXAM_REG_END_DT" : "202001012", //원서접수종료일자
-            "EXAM_START_DT" : "20200305", //시험시작일자
-            "EXAM_END_DT" : "20200305", //시험종료일자
-            "PASS_START_DT" : "20200325", //합격자발표시작일자
-            "PASS_END_DT" : "20200325", //합격자발표종료일자
-        },
-        {"seriesCd" : "23", //계열코드
-            "jmfldnm" : "정보보안기사", //종목명
-            "description" : "2020년도1회1차", //회차
-            "EXAM_REG_START_DT" : "20200113", //원서접수시작일자
-            "EXAM_REG_END_DT" : "20200119", //원서접수종료일자
-            "EXAM_START_DT" : "20200219", //시험시작일자
-            "EXAM_END_DT" : "20200219", //시험종료일자
-            "PASS_START_DT" : "20200323", //합격자발표시작일자
-            "PASS_END_DT" : "20200323", //합격자발표종료일자
-        },
-        {"seriesCd" : "22", //계열코드
-            "jmfldnm" : "보건복지기사", //종목명
-            "description" : "2020년도1회1차", //회차
-            "EXAM_REG_START_DT" : "20200105", //원서접수시작일자
-            "EXAM_REG_END_DT" : "202001012", //원서접수종료일자
-            "EXAM_START_DT" : "20200305", //시험시작일자
-            "EXAM_END_DT" : "20200305", //시험종료일자
-            "PASS_START_DT" : "20200325", //합격자발표시작일자
-            "PASS_END_DT" : "20200325", //합격자발표종료일자
-        },
-        {"seriesCd" : "22", //계열코드
-            "jmfldnm" : "미용사", //종목명
-            "description" : "2020년도1회1차", //회차
-            "EXAM_REG_START_DT" : "20200105", //원서접수시작일자
-            "EXAM_REG_END_DT" : "202001012", //원서접수종료일자
-            "EXAM_START_DT" : "20200305", //시험시작일자
-            "EXAM_END_DT" : "20200305", //시험종료일자
-            "PASS_START_DT" : "20200325", //합격자발표시작일자
-            "PASS_END_DT" : "20200325", //합격자발표종료일자
-        },
-        {"seriesCd" : "22", //계열코드
-            "jmfldnm" : "타투전문가", //종목명
-            "description" : "2020년도1회1차", //회차
-            "EXAM_REG_START_DT" : "20200105", //원서접수시작일자
-            "EXAM_REG_END_DT" : "202001012", //원서접수종료일자
-            "EXAM_START_DT" : "20200305", //시험시작일자
-            "EXAM_END_DT" : "20200305", //시험종료일자
-            "PASS_START_DT" : "20200325", //합격자발표시작일자
-            "PASS_END_DT" : "20200325", //합격자발표종료일자
-        },
-        {"seriesCd" : "22", //계열코드
-            "jmfldnm" : "싱어송라이터", //종목명
-            "description" : "2020년도1회1차", //회차
-            "EXAM_REG_START_DT" : "20200105", //원서접수시작일자
-            "EXAM_REG_END_DT" : "202001012", //원서접수종료일자
-            "EXAM_START_DT" : "20200305", //시험시작일자
-            "EXAM_END_DT" : "20200305", //시험종료일자
-            "PASS_START_DT" : "20200325", //합격자발표시작일자
-            "PASS_END_DT" : "20200325", //합격자발표종료일자
-        }];
-        window.onload = function(){
+    
+	
+	
+       	window.onload = function(){
             /*
             | ------------------------------------------------------------------------------
             | Calendar plugin (rough draft)
@@ -101,15 +34,15 @@
                     dayFormat: 'DDD',
                     weekFormat: 'DDD',
                     monthFormat: 'MM/DD/YYYY',
-                    view: undefined,
+                    filter: undefined,
                 };
 
                 Calendar.prototype.init = function () {
                     if (! this.options.datetime || this.options.datetime == 'now') {
                         this.options.datetime = moment();
                     }
-                    if (! this.options.view) {
-                        this.options.view = 'month';
+                    if (! this.options.filter) {
+                        this.options.filter = 'exam';
                     }
                     this.initScaffold()
                         .initStyle()
@@ -129,7 +62,6 @@
                     } else {
                         this.view = $view[0];
                     }
-                    console.log($currentDate);
 
                     if ($currentDate.length > 0) {
                         var dayFormat = $currentDate.data('day-format'),
@@ -158,7 +90,6 @@
                     var datetime = this.options.datetime.clone(),
                         month = datetime.month();
                     datetime.startOf('month').startOf('week');
-
                     var $view = $(this.view),
                         table = document.createElement('table'),
                         thead = document.createElement('thead'),
@@ -176,13 +107,20 @@
                     for(i = 0; i < 7; i++){
                         td = document.createElement('td');
                         td.appendChild(document.createTextNode(day[i]));
-                        td.className = 'calendar-day';
+                        td.classList.add('calendar-day');
                         tr.appendChild(td);
                     }
 
                     thead.appendChild(tr);
 
-                    var week = 0, i;
+                    var week = 0;
+                    var i;
+
+                    var sdate = datetime.format('YYYYMMDD');
+                    var edate = datetime.add(41, 'day').format('YYYYMMDD');
+                    var today = moment(new Date()).format('YYYYMMDD');
+                    datetime.add(-41, 'day');
+					
                     while (week < 6) {
                         tr = document.createElement('tr');
                         tr.className = 'calendar-month-row';
@@ -191,10 +129,19 @@
                             td.appendChild(document.createTextNode(datetime.format('D')));
                             div = document.createElement('div');
                             div.id = datetime.format('YYYYMMDD');
-                            div.className = 'calendar-month-row-data';
+                            div.classList.add('calendar-month-row-data');
                             td.appendChild(div);
+
                             if (month !== datetime.month()) {
-                                td.className = 'calendar-prior-months-date';
+                                td.classList.add('calendar-other-months-date');
+                            }
+
+                            if (datetime.format('YYYYMMDD') == today){
+                                if(td.classList.contains('calendar-other-months-date')){
+                                    td.style.border = "2px rgba(238, 11, 3, 0.15) solid";
+                                }else{
+                                    td.style.border = "2px rgba(238, 11, 3, 0.51) solid";
+                                }
                             }
                             tr.appendChild(td);
                             datetime.add(1, 'day');
@@ -210,11 +157,34 @@
                             this.options.datetime.format(this.options.monthFormat)
                         );
                     }
-
-                    for(i = 0; i < data.length; i++){
-                        tmp = $('#' + data[i].EXAM_START_DT);
-                        console.log(tmp)
-                        tmp.append("<div>" + data[i].jmfldnm + "</div>");
+                    if(this.options.filter == "exam"){ //통신이 이루어져야함
+                    	$.get("selectCertiByDate", {
+                       		"sdate" : sdate,
+                       		"edate" : edate,
+                       		"flag" : "1"
+                        },
+                        function(data, status){
+                        	console.log(data)
+                        	for(i = 0; i < data.length; i++){
+                                tmp = $('#' + data[i].examstartdt);
+                                tmp.append("<div class='" + data[i].jmcd + " calendar-date-onclick'><span data-toggle='modal' data-target='#myModal'>" + data[i].jmfldnm + "</span></div>");
+                            }
+                        });
+                    }else{
+                    	$.get("selectCertiByDate", {
+                       		"sdate" : sdate,
+                       		"edate" : edate,
+                       		"flag" : "2"
+                        },
+                        function(data, status){
+                        	for(i = 0; i < data.length; i++){
+                                tmp = $('#' + data[i].examregstartdt);
+                                tmp.append("<div class='" + data[i].jmcd + " calendar-date-onclick'><span data-toggle='modal' data-target='#myModal'>" + data[i].jmfldnm + "</span></div>");
+                                tmp = $('#' + data[i].examregenddt);
+                                tmp.append("<div class='" + data[i].jmcd + " calendar-date-onclick'><span data-toggle='modal' data-target='#myModal'>" + data[i].jmfldnm + "</span></div>");
+                            }
+                        });
+                        
                     }
 
                 }
@@ -234,11 +204,22 @@
                     this.renderMonthView();
                 }
 
+                Calendar.prototype.filterByExam = function() {
+                    this.options.filter = "exam";
+                    this.renderMonthView();
+                }
+
+                Calendar.prototype.filterByReg = function() {
+                    this.options.filter = "reg";
+                    this.renderMonthView();
+                }
+
                 function Plugin(option) {
                     return this.each(function () {
                         var $this = $(this),
                             data  = $this.data('bs.calendar'),
                             options = typeof option == 'object' && option;
+
                         if (! data) {
                             data = new Calendar(this, options);
                             $this.data('bs.calendar', data);
@@ -253,6 +234,12 @@
                                 break;
                             case 'next':
                                 data.next();
+                                break;
+                            case 'exam':
+                                data.filterByExam();
+                                break;
+                            case 'reg':
+                                data.filterByReg();
                                 break;
                             default:
                                 break;
@@ -280,6 +267,13 @@
                     }
                 });
 
+                $('input[name="filter"]').change(function(){
+                    var $this = $(this);
+                    var $elem = $this.parents('.calendar');
+
+                    $elem.calendar($('input[name="filter"]:checked').val());
+                })
+
             })(jQuery);
 
             /*
@@ -288,8 +282,50 @@
             | ------------------------------------------------------------------------------
             */
             $('#calendar').calendar();
+            init();
         }
 
+        
+        function init(){
+        	$(document).on("click",".calendar-date-onclick",function(){
+    			//1320
+				//$('#schedule').scrollTop(60)
+				//console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+				//console.log(document.getElementById('schedule').scrollTop)
+				//console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+				
+        		//$('#schedule').animate({scrollTop:0}, 'fast');
+    			//document.getElementById('schedule').scrollTop = 0;
+				param = {"code":this.classList.item(0)};
+    			$.get( "selectCertiByCode" , param, function(data, textStatus, jqXHR){
+    				var str = '';
+
+    				str += '<b>직무분야</b> : ' + data[0].obligfldnm + ' > ' + data[0].mdobligfldnm + '<br>';
+    				str += '<b>자격구분</b> : ' + data[0].qualgbnm+ '<br><br>';
+    				$.each(data, function(idx, val) {
+    					console.log(val.qualgbnm);
+    					str += '<h4  style="text-align:center;">' + val.description+'</h4>';
+    					str += '<table style="text-align:center;width:100%">';
+    					str += '<tr><td>원서접수 시작일자 </td><td>' + moment(val.examregstartdt).format('YYYY-MM-DD')+'</td></tr>';
+    					str += '<tr><td>원서접수 종료일자 </td><td>' + moment(val.examregenddt).format('YYYY-MM-DD')+'</td></tr>';
+    					str += '<tr><td>시험 시작 일자 </td><td>' + moment(val.examstartdt).format('YYYY-MM-DD')+'</td></tr>';
+    					str += '<tr><td>시험 종료 일자 </td><td>' + moment(val.examenddt).format('YYYY-MM-DD')+'</td></tr>';
+    					str += '<tr><td>합격자 발표일 </td><td>' + moment(val.passenddt).format('YYYY-MM-DD')+'</td></tr>';
+    					str += '<tr><td>합격자 발표 종료일 </td><td>' + moment(val.passstartdt).format('YYYY-MM-DD')+'</td></tr>';
+    					str += '</table><br>';
+    				});
+    				console.log('str : ' + str)
+
+    				$('#schedule').html(str);
+
+    				$('.modal-title').html(data[0].jmfldnm);
+    			})
+				alert($('#schedule').scrollTop())
+    		});
+    		
+    		//$("#mydiv").load("selectCertiByDate",sv);
+    	}
+    	//$(init);
     </script>
     <style>
         .calendar-toolbar{
@@ -308,24 +344,24 @@
             overflow-y: auto;
         }
         /* width */
-        .calendar-month-row-data::-webkit-scrollbar {
+        ::-webkit-scrollbar {
             width: 2px;
         }
         /* Track */
-        .calendar-month-row-data::-webkit-scrollbar-track {
+        ::-webkit-scrollbar-track {
             background: #f1f1f1;
         }
 
         /* Handle */
-        .calendar-month-row-data::-webkit-scrollbar-thumb {
+        ::-webkit-scrollbar-thumb {
             background: #888;
         }
 
         /* Handle on hover */
-        .calendar-month-row-data::-webkit-scrollbar-thumb:hover {
+        ::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
-        .calendar-prior-months-date {
+        .calendar-other-months-date {
             color: #DDD;
         }
         .calendar-current-date {
@@ -334,12 +370,23 @@
             width: 115px;
         }
         .calendar-day {
+            background-color: rgba(65, 105, 225, 0.56);
+            color: white;
             text-align: center;
+            border-bottom-width: 0px !important;
         }
         table tr td {
             width: 14vw;
         }
-
+        .calendar-month-today{
+            border: 2px rgba(238, 11, 3, .51) solid !important;
+        }
+        .calendar-month-row-data{
+        	font-size:11px;
+        }
+        .calendar-date-onclick span{
+        	cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -352,10 +399,10 @@
         <div class="calendar-toolbar">
             <div class="calendar-toolbar-filter">
                 <div class="radio">
-                    <label><input type="radio" name="filter" checked>시험일</label>
+                    <label><input type="radio" name="filter" value="exam" checked>시험일</label>
                 </div>
                 <div class="radio">
-                    <label><input type="radio" name="filter">접수기간</label>
+                    <label><input type="radio" name="filter" value="reg">접수기간</label>
                 </div>
             </div>
             <div class="calendar-toolbar-date">
@@ -382,5 +429,6 @@
         </div>
     </div>
 </div>
+<jsp:include page="detail.jsp"></jsp:include>
 </body>
 </html>

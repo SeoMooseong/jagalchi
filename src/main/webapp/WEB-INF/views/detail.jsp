@@ -8,7 +8,20 @@
           <h4 class="modal-title">Modal Header</h4>
         </div>
         <div class="modal-body">
-          <p>This is a large modal.</p>
+        	<div class="row">
+				<div class="col-sm-6">
+        			<div id="schedule" style="width:100%; max-height:400px;overflow-y: auto !important;];">
+        				
+        			</div>
+        		</div>
+        		<div class="col-sm-6">
+        			<div id="statistics">
+        	
+        			</div>
+        		</div>
+        	</div>
+        	
+        	
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
