@@ -57,4 +57,13 @@ public class CertificateController {
 		return cdtos;
 	}
 	
+	@RequestMapping(value = "/selectCertiByCode", method = RequestMethod.GET)
+	public @ResponseBody List<CDTO> selectCertiByCode(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
+
+		String code = request.getParameter("code");
+		response.setCharacterEncoding("utf-8");
+		ArrayList<CDTO> cdtos = null;
+		cdtos = cdao.selectCertiByCode(code);
+		return cdtos;
+	}
 }

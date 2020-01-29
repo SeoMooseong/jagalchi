@@ -33,5 +33,14 @@ public class CertificateDAOImpl implements CertificateDAO{
 		arr = mapper.selectCertiByRegDate(sdate, edate);
 		return arr;
 	}
+	@Override
+	public ArrayList<CDTO> selectCertiByCode(String code) {
+		// TODO Auto-generated method stub
+		ArrayList<CDTO> arr = new ArrayList<CDTO>();
+		
+		CertificateDAO mapper = sqlSession.getMapper(CertificateDAO.class);
+		arr = mapper.selectCertiByCode(code);
+		return arr;
+	}
 
 }

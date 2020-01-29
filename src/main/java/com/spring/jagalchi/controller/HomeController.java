@@ -32,6 +32,11 @@ public class HomeController {
 	public String calendar(Locale locale, Model model) {
 		return "calendar";
 	}
+	
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public String detail(Locale locale, Model model) {
+		return "detail";
+	}
 }
 
 
