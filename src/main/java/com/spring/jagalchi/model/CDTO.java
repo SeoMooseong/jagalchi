@@ -48,7 +48,7 @@ public class CDTO {
 	}
 	@Override
 	public String toString() {
-		return "CertificateModel [jmcd=" + jmcd + ", jmfldnm=" + jmfldnm + ", mdobligfldcd=" + mdobligfldcd
+		return "CDTO [jmcd=" + jmcd + ", jmfldnm=" + jmfldnm + ", mdobligfldcd=" + mdobligfldcd
 				+ ", mdobligfldnm=" + mdobligfldnm + ", obligfldcd=" + obligfldcd + ", obligfldnm=" + obligfldnm
 				+ ", qualgbcd=" + qualgbcd + ", qualgbnm=" + qualgbnm + ", seriescd=" + seriescd + ", seriesnm="
 				+ seriesnm + ", description=" + description + ", examenddt=" + examenddt + ", examregenddt="

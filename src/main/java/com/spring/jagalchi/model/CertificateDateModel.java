@@ -27,7 +27,7 @@ public class CertificateDateModel {
 	}
 	@Override
 	public String toString() {
-		return "CertificateModel [seriescd=" + seriescd + ", description=" + description + ", examenddt=" + examenddt
+		return "CertificateDateModel [seriescd=" + seriescd + ", description=" + description + ", examenddt=" + examenddt
 				+ ", examregenddt=" + examregenddt + ", examregstartdt=" + examregstartdt + ", examstartdt="
 				+ examstartdt + ", passenddt=" + passenddt + ", passstartdt=" + passstartdt + "]";
 	}
