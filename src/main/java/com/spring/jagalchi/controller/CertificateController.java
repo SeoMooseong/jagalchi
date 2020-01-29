@@ -1,9 +1,15 @@
 package com.spring.jagalchi.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.jagalchi.dao.CertificateDAO;
 import com.spring.jagalchi.model.CDTO;
@@ -32,17 +39,31 @@ public class CertificateController {
 	 */
 	
 	@RequestMapping(value = "/selectCertiByDate", method = RequestMethod.GET)
-	public String certificate(Locale locale, Model model) {
+	public @ResponseBody List<CDTO> certificate(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
+		String sdate = request.getParameter("sdate");
+		String edate = request.getParameter("edate");
+		String flag = request.getParameter("flag");
+		if(flag == null) return null;
 		
-		ArrayList<CDTO> cdto = cdao.selectCertiByDate("20200101", "20200231");
-		
-		for(int i = 0 ; i < cdto.size() ; i++) {
-			System.out.println(cdto.get(i));
+		response.setCharacterEncoding("utf-8");
+		ArrayList<CDTO> cdtos = null;
+		if(flag.equals("1")) {
+			cdtos = cdao.selectCertiByDate(sdate, edate);
 		}
-		//System.out.println(cdto);
-		model.addAttribute("serverTime", "call certificate" );
+		else {
+			cdtos = cdao.selectCertiByRegDate(sdate, edate);
+		}
 		
-		return "home";
+		return cdtos;
 	}
 	
+	@RequestMapping(value = "/selectCertiByCode", method = RequestMethod.GET)
+	public @ResponseBody List<CDTO> selectCertiByCode(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
+
+		String code = request.getParameter("code");
+		response.setCharacterEncoding("utf-8");
+		ArrayList<CDTO> cdtos = null;
+		cdtos = cdao.selectCertiByCode(code);
+		return cdtos;
+	}
 }

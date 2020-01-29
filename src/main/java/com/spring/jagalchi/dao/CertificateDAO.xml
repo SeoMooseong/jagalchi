@@ -9,5 +9,13 @@
 		SELECT * FROM certificatedate cd JOIN certificate c ON cd.seriescd = c.seriescd
 		where examstartdt > #{sdate} and examstartdt <![CDATA[ < ]]> #{edate}
 	</select>
-
+	<select id="selectCertiByRegDate" parameterType="String" resultType="com.spring.jagalchi.model.CDTO">
+		SELECT * FROM certificatedate cd JOIN certificate c ON cd.seriescd = c.seriescd
+		where #{sdate} <![CDATA[ < ]]> examregenddt and #{edate} > examregstartdt
+	</select>
+	
+	<select id="selectCertiByCode" parameterType="String" resultType="com.spring.jagalchi.model.CDTO">
+		SELECT * FROM certificatedate cd JOIN certificate c ON cd.seriescd = c.seriescd
+		where jmcd = #{code}
+	</select>
 </mapper>
