@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.jagalchi.dao.CertificateDAO">
+	
+	<select id="selectCertiByDate" parameterType="String" resultType="com.spring.jagalchi.model.CDTO">
+		SELECT * FROM certificatedate cd JOIN certificate c ON cd.seriescd = c.seriescd
+		where examstartdt > #{sdate} and examstartdt <![CDATA[ < ]]> #{edate}
+	</select>
+
+</mapper>
