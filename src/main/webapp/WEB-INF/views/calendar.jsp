@@ -13,7 +13,10 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
     <script>
-        window.onload = function(){
+    
+	
+	
+       	window.onload = function(){
             /*
             | ------------------------------------------------------------------------------
             | Calendar plugin (rough draft)
@@ -279,8 +282,50 @@
             | ------------------------------------------------------------------------------
             */
             $('#calendar').calendar();
+            init();
         }
 
+        
+        function init(){
+        	$(document).on("click",".calendar-date-onclick",function(){
+    			//1320
+				//$('#schedule').scrollTop(60)
+				//console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+				//console.log(document.getElementById('schedule').scrollTop)
+				//console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+				
+        		//$('#schedule').animate({scrollTop:0}, 'fast');
+    			//document.getElementById('schedule').scrollTop = 0;
+				param = {"code":this.classList.item(0)};
+    			$.get( "selectCertiByCode" , param, function(data, textStatus, jqXHR){
+    				var str = '';
+
+    				str += '<b>직무분야</b> : ' + data[0].obligfldnm + ' > ' + data[0].mdobligfldnm + '<br>';
+    				str += '<b>자격구분</b> : ' + data[0].qualgbnm+ '<br><br>';
+    				$.each(data, function(idx, val) {
+    					console.log(val.qualgbnm);
+    					str += '<h4  style="text-align:center;">' + val.description+'</h4>';
+    					str += '<table style="text-align:center;width:100%">';
+    					str += '<tr><td>원서접수 시작일자 </td><td>' + moment(val.examregstartdt).format('YYYY-MM-DD')+'</td></tr>';
+    					str += '<tr><td>원서접수 종료일자 </td><td>' + moment(val.examregenddt).format('YYYY-MM-DD')+'</td></tr>';
+    					str += '<tr><td>시험 시작 일자 </td><td>' + moment(val.examstartdt).format('YYYY-MM-DD')+'</td></tr>';
+    					str += '<tr><td>시험 종료 일자 </td><td>' + moment(val.examenddt).format('YYYY-MM-DD')+'</td></tr>';
+    					str += '<tr><td>합격자 발표일 </td><td>' + moment(val.passenddt).format('YYYY-MM-DD')+'</td></tr>';
+    					str += '<tr><td>합격자 발표 종료일 </td><td>' + moment(val.passstartdt).format('YYYY-MM-DD')+'</td></tr>';
+    					str += '</table><br>';
+    				});
+    				console.log('str : ' + str)
+
+    				$('#schedule').html(str);
+
+    				$('.modal-title').html(data[0].jmfldnm);
+    			})
+				alert($('#schedule').scrollTop())
+    		});
+    		
+    		//$("#mydiv").load("selectCertiByDate",sv);
+    	}
+    	//$(init);
     </script>
     <style>
         .calendar-toolbar{

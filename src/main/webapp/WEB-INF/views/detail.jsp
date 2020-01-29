@@ -10,7 +10,7 @@
         <div class="modal-body">
         	<div class="row">
 				<div class="col-sm-6">
-        			<div id="schedule"  style="width:100%; max-height:400px;overflow-y: auto;">
+        			<div id="schedule" style="width:100%; max-height:400px;overflow-y: auto !important;];">
         				
         			</div>
         		</div>
