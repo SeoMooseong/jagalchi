@@ -99,8 +99,8 @@ alert("다시 확인 후 시도하세요.");
                 <label>AGE</label><input type="number" name="age" min="0" max="150" class="form-control">
             </div>
             <div class="register-box-row register-button-group">
-                <button class="btn btn-default register-button" onclick="register()">가입</button>
-                <button class="btn btn-default register-button"  onclick="location='login'">취소</button>
+                <input type="submit" class="btn btn-default register-button" value="가입">
+                <button type="button" class="btn btn-default register-button"  onclick="location='login'">취소</button>
             </div>
         </form>
     </div>

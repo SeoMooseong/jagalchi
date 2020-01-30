@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.spring.jagalchi.dao.MemberDAOImpl;
+import com.spring.jagalchi.dao.MemberDAO;
 import com.spring.jagalchi.model.MemberModel;
 
 @Controller
 public class MemberController {
 	
 	@Autowired
-	MemberDAOImpl memberDAO;
+	MemberDAO memberDAO;
 	
 	@RequestMapping(value = "/members", method = RequestMethod.GET)
 	public @ResponseBody List<MemberModel> selectAllMember(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {

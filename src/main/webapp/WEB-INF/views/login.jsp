@@ -86,8 +86,8 @@ alert("ID/PW를 다시 확인하세요.");
                 <label>PASSWORD</label><input type="password" name="password" class="form-control">
             </div>
             <div class="login-box-row login-button-group">
-                <button class="btn btn-default login-button">로그인</button>
-                <button class="btn btn-default login-button" onclick="location='register'">회원가입</button>
+                <input type="submit" class="btn btn-default login-button" value="로그인">
+                <button type="button" class="btn btn-default login-button" onclick="location='register'">회원가입</button>
             </div>
         </form>
     </div>

@@ -1,19 +1,15 @@
 package com.spring.jagalchi.model;
 
 public class MemberModel {
-	String id;
-	String password;
-	String name;
-	String major;
-	int age;
+	String id;  //아이디
+	String password;  //비밀번호
+	String name;  //이름
+	String major; //전공
+	int age; //나이
 	
-	public MemberModel() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+	public MemberModel() {	}
 	
 	public MemberModel(String id, String password, String name, String major, int age) {
-		super();
 		this.id = id;
 		this.password = password;
 		this.name = name;
