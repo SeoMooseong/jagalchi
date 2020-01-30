@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.spring.jagalchi.model.CDTO;
+import com.spring.jagalchi.model.StatisticsModel;
 
 @Repository
 public class CertificateDAOImpl implements CertificateDAO{
@@ -44,12 +45,26 @@ public class CertificateDAOImpl implements CertificateDAO{
 		return arr;
 	}
 	@Override
-	public ArrayList<CDTO> selectStatistics(String code) {
+	public ArrayList<StatisticsModel> selectStatistics(String code) {
 		// TODO Auto-generated method stub
-		ArrayList<CDTO> arr = new ArrayList<CDTO>();
+		ArrayList<StatisticsModel> arr = new ArrayList<StatisticsModel>();
 		
 		CertificateDAO mapper = sqlSession.getMapper(CertificateDAO.class);
 		arr = mapper.selectStatistics(code);
+		return arr;
+	}
+	@Override
+	public String selectObligfldcdByjmcd(String code) {
+		// TODO Auto-generated method stub
+		CertificateDAO mapper = sqlSession.getMapper(CertificateDAO.class);
+		return mapper.selectObligfldcdByjmcd(code);
+	}
+	@Override
+	public ArrayList<StatisticsModel> selectAllStatistics(String code) {
+		ArrayList<StatisticsModel> arr = new ArrayList<StatisticsModel>();
+		
+		CertificateDAO mapper = sqlSession.getMapper(CertificateDAO.class);
+		arr = mapper.selectAllStatistics(code);
 		return arr;
 	}
 

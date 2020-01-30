@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.spring.jagalchi.dao.CertificateDAO;
 import com.spring.jagalchi.model.CDTO;
+import com.spring.jagalchi.model.StatisticsModel;
 
 /**
  * Handles requests for the application home page.
@@ -74,16 +75,25 @@ public class CertificateController {
 	}
 	
 	@RequestMapping(value = "/selectStatistics", method = RequestMethod.GET)
-	public @ResponseBody List<CDTO> selectStatistics(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
-		System.out.println("selectCertiByCode");
+	public @ResponseBody List<StatisticsModel> selectStatistics(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
+		System.out.println("selectStatistics");
 		String code = request.getParameter("code");
 		response.setCharacterEncoding("utf-8");
-		ArrayList<CDTO> cdtos = null;
-		cdtos = cdao.selectStatistics(code);
+		ArrayList<StatisticsModel> cdtos = null;
+		
+		String ob = cdao.selectObligfldcdByjmcd(code);
+		if(ob.equals(" ")) {
+			cdtos = cdao.selectAllStatistics(code);
+		}
+		else {
+			cdtos = cdao.selectStatistics(code);
+		}
 		
 		for(int i = 0 ; i < cdtos.size() ; i++) {
+			cdtos.get(i).setPilColor("#555555");
+			cdtos.get(i).setSilColor("#999999");
 			System.out.println(cdtos.get(i));
-		}
-		return cdtos;
+		}  
+		return cdtos;  
 	}
 }

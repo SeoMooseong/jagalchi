@@ -3,27 +3,42 @@
 <header>
 	<script src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
+	
+	var arr = [];
 		function getStatistics(){
-			/*
-			$.get('selectStatistics',{'code':$('#rjmcd')}, function(data){
-				alert(date);
-				drawReview(data);
+			
+			$.get('selectStatistics',{code:$('#rjmcd').val()}, function(data){
+
+				arr = [];
+				arr.push(["자격증", "필기 합격률",{ role: 'style' }, "실기 합격률",{ role: 'style' }]);
+				
+				for(i = 0 ; i < data.length ; i++){
+					brr = [];
+					brr.push(data[i].jmnm);
+					brr.push(data[i].pil);
+					brr.push(data[i].pilColor);
+					brr.push(data[i].sil);
+					brr.push(data[i].silColor);
+					arr.push(brr);
+				}
+				console.log(arr);
+				google.charts.load('current', {'packages':['corechart']});
+	        	google.charts.setOnLoadCallback(drawChart);
 			})
-			*/
-			google.charts.load('current', {'packages':['corechart']});
-        	google.charts.setOnLoadCallback(drawChart);
+			
         	
         	$.get('review',{'rjmcd':$('#rjmcd').val()}, function(data){
 				drawReview(data);
 			})
 		}
 		function drawChart() { // array 안에 array를 그려서 chart가 만들어짐
+			/*
 			arr = [["자격증", "필기 합격률",{ role: 'style' }, "실기 합격률",{ role: 'style' }],
 				["정처기", 50, '#b87333', 60, '#b87333'],
 				["정보기", 70, 'black', 80, '#b87333'],
 				["네관", 60, 'black', 20, '#b87333']
 				];
-			
+			*/
 			var data = google.visualization
 			.arrayToDataTable(arr);
 			

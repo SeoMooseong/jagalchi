@@ -19,7 +19,7 @@ import com.spring.jagalchi.model.CertificateRegCntModel;
 
 public class CertificateRegCntParser {
 	//String oracleURL = "jdbc:oracle:thin:@localhost:1521:orcl";
-	String oracleURL = "jdbc:oracle:thin:@localhost:1521:xe";
+	String oracleURL = "jdbc:oracle:thin:@localhost:1521:orcl";
 	String id="scott";
 	String pass = "tiger";
 

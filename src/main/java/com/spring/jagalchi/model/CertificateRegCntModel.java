@@ -7,14 +7,17 @@ public class CertificateRegCntModel {
 	String piilrcnt2; //필기1년전지원자
 	String piilrcnt3; //필기2년전지원자
 	String piilrcnt4; //필기3년전지원자
+	
 	String piilpcnt1; //필기올해합격자
 	String piilpcnt2; //필기1년전합격자
 	String piilpcnt3; //필기2년전합격자
 	String piilpcnt4; //필기3년전합격자
+	
 	String siilrcnt1; //실기올해지원자
 	String siilrcnt2; //실기1년전지원자
 	String siilrcnt3; //실기2년전지원자
 	String siilrcnt4; //실기3년전지원자
+	
 	String siilpcnt1; //실기올해합격자
 	String siilpcnt2; //실기1년전합격자
 	String siilpcnt3; //실기2년전합격자

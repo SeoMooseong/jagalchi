@@ -19,12 +19,30 @@
 		where jmcd = #{code}
 	</select>
 	
-	<select id="selectStatistics" parameterType="String" resultType="com.spring.jagalchi.model.CDTO">
-		SELECT * FROM certificatedate cd JOIN certificate c ON cd.seriescd = c.seriescd
-		where jmcd = #{code}
-		
-		select obligfldcd from certificate where obligfldcd = (
-			select obligfldcd  from certificate where #{code}=jmcd
-		)
+	<select id="selectStatistics" parameterType="String" resultType="com.spring.jagalchi.model.StatisticsModel">
+		select * from(
+		    select jmnm 
+		        , round(((piilpcnt1 / decode(piilrcnt1, 0, 1, piilrcnt1))+(piilpcnt2 / decode(piilrcnt2, 0, 1, piilrcnt2))+(piilpcnt3 / decode(piilrcnt3, 0, 1, piilrcnt3))+(piilpcnt4 / decode(piilrcnt4, 0, 1, piilrcnt4)))/4*100, 2) pil
+		        ,round(((siilpcnt1 / decode(siilrcnt1, 0, 1, siilrcnt1))+(siilpcnt2 / decode(siilrcnt2, 0, 1, siilrcnt2))+(siilpcnt3 / decode(siilrcnt3, 0, 1, siilrcnt3))+(siilpcnt4 / decode(siilrcnt4, 0, 1, siilrcnt4)))/4*100, 2) sil
+		        ,(piilrcnt1+piilrcnt2+piilrcnt3+piilrcnt4+siilrcnt1+siilrcnt2+siilrcnt3+siilrcnt4) total
+		    from certificateregcnt
+		    where jmcd in (select jmcd from certificate where obligfldcd = (
+		        select obligfldcd  from certificate where #{code}=jmcd
+		    ))
+		    order by total desc nulls last
+		) where rownum <![CDATA[ < ]]> 4
+	</select>
+	<select id="selectObligfldcdByjmcd" parameterType="String" resultType="String">
+		select obligfldcd  from certificate where #{code}=jmcd
+	</select>
+	<select id="selectAllStatistics" parameterType="String" resultType="com.spring.jagalchi.model.StatisticsModel">
+		select * from(
+		    select jmnm
+		        , round(((piilpcnt1 / decode(piilrcnt1, 0, 1, piilrcnt1))+(piilpcnt2 / decode(piilrcnt2, 0, 1, piilrcnt2))+(piilpcnt3 / decode(piilrcnt3, 0, 1, piilrcnt3))+(piilpcnt4 / decode(piilrcnt4, 0, 1, piilrcnt4)))/4*100, 2) pil
+		        ,round(((siilpcnt1 / decode(siilrcnt1, 0, 1, siilrcnt1))+(siilpcnt2 / decode(siilrcnt2, 0, 1, siilrcnt2))+(siilpcnt3 / decode(siilrcnt3, 0, 1, siilrcnt3))+(siilpcnt4 / decode(siilrcnt4, 0, 1, siilrcnt4)))/4*100, 2) sil
+		        ,(piilrcnt1+piilrcnt2+piilrcnt3+piilrcnt4+siilrcnt1+siilrcnt2+siilrcnt3+siilrcnt4) total
+		    from certificateregcnt
+		    order by total desc nulls last
+		) where rownum <![CDATA[ < ]]> 4
 	</select>
 </mapper>
