@@ -72,4 +72,18 @@ public class CertificateController {
 		}
 		return cdtos;
 	}
+	
+	@RequestMapping(value = "/selectStatistics", method = RequestMethod.GET)
+	public @ResponseBody List<CDTO> selectStatistics(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
+		System.out.println("selectCertiByCode");
+		String code = request.getParameter("code");
+		response.setCharacterEncoding("utf-8");
+		ArrayList<CDTO> cdtos = null;
+		cdtos = cdao.selectStatistics(code);
+		
+		for(int i = 0 ; i < cdtos.size() ; i++) {
+			System.out.println(cdtos.get(i));
+		}
+		return cdtos;
+	}
 }
