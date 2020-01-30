@@ -16,6 +16,6 @@
 	<update id="updateReview">
 		UPDATE review 
 		SET rcontent = #{rcontent}
-		WHERE rid = #{rid}
+		WHERE rno = #{rno}
 	</update>
 </mapper>

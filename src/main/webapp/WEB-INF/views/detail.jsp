@@ -50,14 +50,15 @@
 				drawReview(result);
 				$("#rcontent").val('');
 			})
+			
 		}
-		function deleteReview(t){
+		function deleteReview(rno){
 			$.ajax({
 				type:"post",
 				url:"deleteReview",
 				data : {
-					rno :  $(t).attr('name'),
-					rjmcd :  $('#rjmcd').val()
+					"rno" :  rno,
+					"rjmcd" :  $('#rjmcd').val()
 				},
 				success: function(result){
 					drawReview(result);
@@ -67,25 +68,80 @@
 				}	
 			});
 		}
+		function modifyReviewBtn(rno){
+			
+			/* $(document).on("click","#modify-review",function(){
+    		str = "";
+    		str += "<div style='display: flex;justify-content: space-between;'>";
+    		str += "<textarea style='width:88%' class='form-control' id='econtent'></textarea>";
+    		str += "<button style='width:10%' class='btn btn-info' onclick='updateReview()'>작성</button>";
+    		str += "</div>";
+    		console.log('content'+$(this).attr('name'));
+    		console.log($('#content'+$(this).attr('name')));
+    		var original = $('#content'+$(this).attr('name')).text();
+    		console.log(original)
+    		$('#content'+$(this).attr('name')).html(str);
+    		$('#econtent').val(original);
+    	}); */
+    	
+    		var originalData = $('#content' + rno).text();
+    		$('div.delete-modify').css('display', 'none');	
+    		param = {
+    			rno : rno,
+    			data : originalData
+    		}
+    		console.log(param)
+    		str = "<textarea class='form-control' id='econtent'></textarea>";
+    		str += "<div style='display:flex; justify-content:flex-end;'><span class='dm-hover' onclick='doModify(" + rno + ")'><i class='fas fa-check' /></span><span class='dm-hover' onclick='undoModify("+param+")'><i class='fas fa-undo'></i></span></div>"
+    		
+    		$('#content'+ rno).html(str);
+    		$('#econtent').val(originalData);
+		}
+		function doModify(rno){
+			$.ajax({
+				type:"post",
+				url:"updateReview",
+				data : {
+					"rno" :  rno,
+					"rcontent" : $('#econtent').val(),
+					"rjmcd" :  $('#rjmcd').val()
+				},
+				success: function(result){
+					drawReview(result);
+					$(".delete-modify").css("display", "flex");
+				},
+				error: function(xhr, status, error) {
+					alert(error);
+				}	
+			});
+		}
+		function undoModify(param){
+			$("#content"+ param.rno).empty();
+			$("#content"+ param.rno).text(param.data);
+			$("div.delete-modify").css("display", "flex");
+		}
 		function drawReview(data){ 
 			
-			str = "<h3>후기</h3>";
+			//str = "<h3>후기</h3>";
+			str = "";
 			for(i = 0 ; i < data.length ; i++){
 				str += "<hr class='boundary'>";
 				str += "<div class='id-date'><b>"+data[i].rid+"</b><span style='float: right;'>"+moment(data[i].rdate).format('YYYY-MM-DD')+"</span></div>";
-				str += "<div id='content"+data[i].rno+"'><p>"+data[i].rcontent+"</p></div>";
+				str += "<div id='content"+data[i].rno+"'>"+data[i].rcontent+"</div>";
 				if("${isLogin.id}"  == data[i].rid ){
-					str += "<div id='delete-modify'><p class='dm-hover' id='delete-review' name='"+data[i].rno+"'><i class='far fa-trash-alt'></i>삭제</p>&nbsp&nbsp<p class='dm-hover' id='modify-review'  name='"+data[i].rno+"'><i class='fas fa-eraser'></i>수정</p></div>";
+					str += "<div class='delete-modify'><span class='dm-hover' onclick='modifyReviewBtn("+data[i].rno+")'><i class='fas fa-eraser' />수정</span><span class='dm-hover' onclick='deleteReview("+data[i].rno+")'><i class='far fa-trash-alt' />삭제</span></div>"
+					//str += "<div id='delete-modify'><p class='dm-hover' id='delete-review' name='"+data[i].rno+"'><i class='far fa-trash-alt'></i>삭제</p>&nbsp&nbsp<p class='dm-hover' id='modify-review'  name='"+data[i].rno+"'><i class='fas fa-eraser'></i>수정</p></div>";
 				}
 			}
 			$('#review').html(str);
+			
 		}
 		
 	</script>
 	<style type="text/css">
-	#delete-modify {
+	.delete-modify {
 		display:flex;
-		flex-direction: row-reverse;
+		justify-content: flex-end;
 	}
 	.boundary {
 		margin-top: 7px;
@@ -98,12 +154,17 @@
 	.dm-hover{
 		color:gray;
 		font-size: 12px;
+		margin-left:5px;
 	}
 	p {
 		margin-bottom: 0px;
 	}
 	#content {
 		margin-top: 5px;
+	}
+	#review {
+		max-height: 230px;
+		overflow-y: auto;
 	}
 	</style>
 </header>
@@ -131,6 +192,7 @@
 				<div class="row">
 					<div class="col-sm-1"></div>
 					<div class="col-sm-10">
+						<h3>후기</h3>
 						<div id="review">
 						
 							

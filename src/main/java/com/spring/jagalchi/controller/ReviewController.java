@@ -59,7 +59,7 @@ public class ReviewController {
 		return reviews;
 	}
 	
-	@RequestMapping(value = "/review", method = RequestMethod.PUT)
+	@RequestMapping(value = "/updateReview", method = RequestMethod.POST)
 	public @ResponseBody List<ReviewModel> updateReview(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
 		response.setCharacterEncoding("utf-8");
 		ArrayList<ReviewModel> reviews = null;
