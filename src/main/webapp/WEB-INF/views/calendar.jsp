@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:if test="${isLogin == null }">
+<script language="javascript">
+window.location.href = 'login';
+alert('로그인 후 이용가능합니다.');
+</script>
+</c:if>
 <!DOCTYPE html>
 <html>
 <head>
@@ -392,6 +399,9 @@
         .calendar-date-onclick span{
         	cursor: pointer;
         }
+        #logout{
+        	cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -399,6 +409,9 @@
     <h1 class="page-header">
         <i class="fa fa-calendar"></i> 자갈취
     </h1>
+    <c:if test="${isLogin != null }">
+		<span onclick="location='logout'" id="logout">로그아웃</span>
+	</c:if>
     <div class="calendar" id="calendar">
         <!-- Calendar toolbar -->
         <div class="calendar-toolbar">

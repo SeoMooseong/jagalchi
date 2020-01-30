@@ -24,8 +24,8 @@ import com.spring.jagalchi.model.CertificateModel;
 import org.json.*;
 
 public class CertificateParser {
-	String oracleURL = "jdbc:oracle:thin:@localhost:1521:orcl";
-	//String oracleURL = "jdbc:oracle:thin:@192.168.0.21:1521:xe";
+	//String oracleURL = "jdbc:oracle:thin:@localhost:1521:orcl";
+	String oracleURL = "jdbc:oracle:thin:@localhost:1521:xe";
 	String id="scott";
 	String pass = "tiger";
 
