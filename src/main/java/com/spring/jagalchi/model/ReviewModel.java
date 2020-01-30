@@ -7,18 +7,18 @@ public class ReviewModel {
 	String rjmcd; //자격증코드
 	String rid;  //작성자id
 	String rcontent; //후기내용
-	Date rdate; //작성일자
+	String rdate; //작성일자
 	
 	public ReviewModel() {	}
 	
-	public ReviewModel(String rjmcd, String rid, String rcontent, Date rdate) {
+	public ReviewModel(String rjmcd, String rid, String rcontent, String rdate) {
 		this.rjmcd = rjmcd;
 		this.rid = rid;
 		this.rcontent = rcontent;
 		this.rdate = rdate;
 	}
 	
-	public ReviewModel(int rno, String rjmcd, String rid, String rcontent, Date rdate) {
+	public ReviewModel(int rno, String rjmcd, String rid, String rcontent, String rdate) {
 		this.rno = rno;
 		this.rjmcd = rjmcd;
 		this.rid = rid;
@@ -50,10 +50,10 @@ public class ReviewModel {
 	public void setRcontent(String rcontent) {
 		this.rcontent = rcontent;
 	}
-	public Date getRdate() {
+	public String getRdate() {
 		return rdate;
 	}
-	public void setRdate(Date rdate) {
+	public void setRdate(String	 rdate) {
 		this.rdate = rdate;
 	}
 }

@@ -29,9 +29,10 @@ public class ReviewController {
 	@RequestMapping(value = "/review", method = RequestMethod.GET)
 	public @ResponseBody List<ReviewModel> selectAllReview(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
 		response.setCharacterEncoding("utf-8");
+		String rjmcd = request.getParameter("rjmcd");
 		ArrayList<ReviewModel> reviews = null;
-		
-		reviews = reviewDAO.selectAllReview();
+		System.out.println("selectAllReview");
+		reviews = reviewDAO.selectAllReview(rjmcd);
 		
 		return reviews;
 	}
@@ -39,11 +40,12 @@ public class ReviewController {
 	@RequestMapping(value = "/review", method = RequestMethod.POST)
 	public @ResponseBody List<ReviewModel> insertReview(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model) {
 		response.setCharacterEncoding("utf-8");
+		System.out.println("insertReview");
 		ArrayList<ReviewModel> reviews = null;
 		
 		String rjmcd = request.getParameter("rjmcd");
 		String rcontent = request.getParameter("rcontent");
-		Date rdate = Date.valueOf(request.getParameter("rdate"));
+		String rdate = String.valueOf(request.getParameter("rdate"));
 		
 		MemberModel member = (MemberModel) session.getAttribute("isLogin");
 		String rid = member.getId();
@@ -51,7 +53,7 @@ public class ReviewController {
 		int result = reviewDAO.insertReview(new ReviewModel(rjmcd, rid, rcontent, rdate));
 
 		if(result != 0) {
-			reviews = reviewDAO.selectAllReview();
+			reviews = reviewDAO.selectAllReview(rjmcd);
 		}
 		
 		return reviews;
@@ -61,30 +63,34 @@ public class ReviewController {
 	public @ResponseBody List<ReviewModel> updateReview(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
 		response.setCharacterEncoding("utf-8");
 		ArrayList<ReviewModel> reviews = null;
-		
+		System.out.println("updateReview");
+
+		String rjmcd = request.getParameter("rjmcd");
 		int rno = Integer.parseInt(request.getParameter("rno"));
 		String rcontent = request.getParameter("rcontent");
 		
 		int result = reviewDAO.updateReview(rno, rcontent);
 
 		if(result != 0) {
-			reviews = reviewDAO.selectAllReview();
+			reviews = reviewDAO.selectAllReview(rjmcd);
 		}
 		
 		return reviews;
 	}
 	
-	@RequestMapping(value = "/review", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/deleteReview", method = RequestMethod.POST)
 	public @ResponseBody List<ReviewModel> deleteReview(HttpServletRequest request, HttpServletResponse response, Locale locale, Model model) {
 		response.setCharacterEncoding("utf-8");
 		ArrayList<ReviewModel> reviews = null;
-		
+		System.out.println("deleteReview");
+		String rjmcd = request.getParameter("rjmcd");
+		System.out.println(rjmcd +" " + request.getParameter("rno"));
 		int rno = Integer.parseInt(request.getParameter("rno"));
 		
 		int result = reviewDAO.deleteReview(rno);
 
 		if(result != 0) {
-			reviews = reviewDAO.selectAllReview();
+			reviews = reviewDAO.selectAllReview(rjmcd);
 		}
 		
 		return reviews;
