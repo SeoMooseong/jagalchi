@@ -37,6 +37,16 @@ public class HomeController {
 	public String detail(Locale locale, Model model) {
 		return "detail";
 	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String register(Locale locale, Model model) {
+		return "register";
+	}
+	
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
+	public String login(Locale locale, Model model) {
+		return "login";
+	}
 }
 
 
