@@ -36,6 +36,7 @@ public class CertificateParser {
 		JSONObject jsonobject = null;
 		try {
 			jsonobject = (JSONObject)jsonparser.parse(readUrl());
+			System.out.println(jsonobject);
 		} catch (ParseException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
@@ -88,6 +89,9 @@ public class CertificateParser {
 				
 			}
 
+			
+			
+			
 			try {
 				conn.close();
 			} catch (SQLException e) {
@@ -136,7 +140,7 @@ public class CertificateParser {
                    + "&targetDt=20150101");*/
 
 			URL url = new URL(
-					"http://openapi.q-net.or.kr/api/service/rest/InquiryListNationalQualifcationSVC/getList?_type=json&serviceKey=3QIlWyjnvi9cXAIOdbeqsNnny4vXsjfxnJVY1CcqF0qv%2FRunHsJ7TxkLs9baDpU%2BKdQY2fyWZsCjs73gpm6QDA%3D%3D");
+					"http://openapi.q-net.or.kr/api/service/rest/InquiryListNationalQualifcationSVC/getList?_type=json&serviceKey=h9Rl76R0OAPihVKvN2LnodougR42HzY43KMDkAZVvqs1eNMFXlAn086yNNz51LBJI7BYo7E2JkWjo6tpgFS1nQ%3D%3D");
 
 
 			reader = new BufferedInputStream(url.openStream());

@@ -18,4 +18,13 @@
 		SELECT * FROM certificatedate cd JOIN certificate c ON cd.seriescd = c.seriescd
 		where jmcd = #{code}
 	</select>
+	
+	<select id="selectStatistics" parameterType="String" resultType="com.spring.jagalchi.model.CDTO">
+		SELECT * FROM certificatedate cd JOIN certificate c ON cd.seriescd = c.seriescd
+		where jmcd = #{code}
+		
+		select obligfldcd from certificate where obligfldcd = (
+			select obligfldcd  from certificate where #{code}=jmcd
+		)
+	</select>
 </mapper>

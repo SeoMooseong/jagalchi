@@ -297,10 +297,14 @@
         		//$('#schedule').animate({scrollTop:0}, 'fast');
     			//document.getElementById('schedule').scrollTop = 0;
 				param = {"code":this.classList.item(0)};
+				code = this.classList.item(0);
     			$.get( "selectCertiByCode" , param, function(data, textStatus, jqXHR){
     				var str = '';
-
-    				str += '<b>직무분야</b> : ' + data[0].obligfldnm + ' > ' + data[0].mdobligfldnm + '<br>';
+    				if(data[0].obligfldnm == ' ' || data[0].mdobligfldnm == ' '){
+						str += '<b>직무분야</b> : ' + data[0].obligfldnm + data[0].mdobligfldnm + '<br>';
+					}else{
+						str += '<b>직무분야</b> : ' + data[0].obligfldnm + ' > ' + data[0].mdobligfldnm + '<br>';
+					}
     				str += '<b>자격구분</b> : ' + data[0].qualgbnm+ '<br><br>';
     				$.each(data, function(idx, val) {
     					console.log(val.qualgbnm);
@@ -317,10 +321,11 @@
     				console.log('str : ' + str)
 
     				$('#schedule').html(str);
-
+    				$('#rjmcd').val(code);
     				$('.modal-title').html(data[0].jmfldnm);
+    				
+    				getStatistics();
     			})
-				alert($('#schedule').scrollTop())
     		});
     		
     		//$("#mydiv").load("selectCertiByDate",sv);
