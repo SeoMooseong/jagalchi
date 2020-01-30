@@ -8,7 +8,7 @@
 		SELECT * FROM review
 	</select>
 	<insert id="insertReview">
-		INSERT INTO review values(#{id}, #{password}, #{name}, #{major}, #{age})
+		INSERT INTO review values(REVIEW_CNT.NEXTVAL, #{rjmcd}, #{rid}, #{rcontent}, #{rdate})
 	</insert>
 	<delete id="deleteReview">
 		DELETE FROM review WHERE id = #{rid}
