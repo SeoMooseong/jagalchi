@@ -4,13 +4,19 @@
 	<script src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
 		function getStatistics(){
-			
+			/*
 			$.get('selectStatistics',{'code':$('#rjmcd')}, function(data){
+				alert(date);
 				drawReview(data);
 			})
-			
+			*/
 			google.charts.load('current', {'packages':['corechart']});
         	google.charts.setOnLoadCallback(drawChart);
+        	
+        	$.get('review',{'rjmcd':$('#rjmcd').val()}, function(data){
+				alert("aaa"+date);
+				drawReview(data);
+			})
 		}
 		function drawChart() { // array 안에 array를 그려서 chart가 만들어짐
 			arr = [["자격증", "합격률", { role: 'style' }],

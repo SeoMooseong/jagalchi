@@ -20,7 +20,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 	public ArrayList<ReviewModel> selectAllReview() {
 		arr = new ArrayList<ReviewModel>();
 		mapper = sqlSession.getMapper(ReviewDAO.class);
-		
+		System.out.println("mapper.selectAllReview() :: "+ mapper.selectAllReview());
 		arr = mapper.selectAllReview();
 		
 		return arr;
