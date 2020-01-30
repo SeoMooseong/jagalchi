@@ -17,11 +17,10 @@ public class ReviewDAOImpl implements ReviewDAO {
 	ArrayList<ReviewModel> arr;
 	
 	@Override
-	public ArrayList<ReviewModel> selectAllReview() {
+	public ArrayList<ReviewModel> selectAllReview(String rjmcd) {
 		arr = new ArrayList<ReviewModel>();
 		mapper = sqlSession.getMapper(ReviewDAO.class);
-		System.out.println("mapper.selectAllReview() :: "+ mapper.selectAllReview());
-		arr = mapper.selectAllReview();
+		arr = mapper.selectAllReview(rjmcd);
 		
 		return arr;
 	}

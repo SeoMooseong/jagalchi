@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!-- 
+
 <c:if test="${isLogin == null }">
 <script language="javascript">
 window.location.href = 'login';
 alert('로그인 후 이용가능합니다.');
 </script>
-</c:if> -->
+</c:if> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -336,6 +336,20 @@ alert('로그인 후 이용가능합니다.');
     			})
     		});
     		
+        	$(document).on("click","#delete-review",function(){
+        		console.log(this);
+        		deleteReview(this);
+        	});
+        	$(document).on("click","#modify-review",function(){
+        		str = "";
+        		str += "<div style='display: flex;justify-content: space-between;'>";
+        		str += "<textarea style='width:88%' class='form-control' id='rcontent'></textarea>";
+        		str += "<button style='width:10%' class='btn btn-info' onclick='updateReview()'>작성</button>";
+        		str += "</div>";
+        		console.log('content'+$(this).attr('name'));
+        		console.log($('#content'+$(this).attr('name')));
+        		$('#content'+$(this).attr('name')).html(str);
+        	});
     		//$("#mydiv").load("selectCertiByDate",sv);
     	}
     	//$(init);
