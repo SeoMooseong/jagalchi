@@ -125,4 +125,18 @@ public class MemberController {
 		return "redirect:login";
 
 	}
+
+	@RequestMapping(value = "/idCheck", method = RequestMethod.GET)
+	public @ResponseBody Boolean idCheck(HttpServletRequest request, HttpServletResponse response) {
+		response.setCharacterEncoding("utf-8");
+		String id = request.getParameter("id");
+		
+		MemberModel member = memberDAO.selectMemberById(id);
+		
+		if(member == null) { //성공
+			return true;
+		}else {
+			return false;
+		}
+	}
 }

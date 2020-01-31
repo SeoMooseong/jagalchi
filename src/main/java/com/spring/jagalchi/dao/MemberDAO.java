@@ -11,6 +11,6 @@ public interface MemberDAO {
 	public MemberModel selectMemberById(@Param("id") String id);
 	public MemberModel loginMember(@Param("id") String id, @Param("password") String password);
 	public int insertMember(MemberModel member);
-	public int deleteMember(String id);
+	public int deleteMember(@Param("id") String id);
 	public int updateMember(MemberModel member);
 }

@@ -24,6 +24,45 @@ alert("다시 확인 후 시도하세요.");
     <script src="https://kit.fontawesome.com/088b1a9afe.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script>
+        window.onload = function () {
+            $('#id').change(function () {
+                var btn = $('#id-check-btn');
+                btn.text("중복체크");
+                btn.removeClass("disabled");
+                btn.removeClass("btn-danger");
+                btn.addClass("btn-info");
+                $('.username_input').attr("check_result", "fail");
+            })
+        }
+
+    function idCheck(){
+        var id = $('#id').val();
+        $.get('idCheck', {
+            "id" : id
+        },function(data){
+            var btn = $('#id-check-btn')
+            btn.addClass("disabled");
+            btn.removeClass("btn-info");
+            if(data){
+                btn.addClass("btn-success");
+                btn.text("사용가능");
+                $('.username_input').attr("check_result", "success");
+            }else{
+                btn.addClass("btn-danger");
+                btn.text("사용불가");
+                $('.username_input').attr("check_result", "fail");
+            }
+        })
+    }
+
+    function isSubmit(){
+        if ($('#id').attr("check_result") == "success") {
+            return true;
+        } else {
+            alert("아이디 중복체크를 해주세요.");
+            return false;
+        }
+    }
     </script>
     <style>
         #register-main-container{
@@ -82,6 +121,13 @@ alert("다시 확인 후 시도하세요.");
             outline: none !important;
             box-shadow: none !important;
         }
+        .register-box-row-id{
+        	display:flex;
+        	justify-content: space-between;
+        }
+        #id-check-btn{
+        	height: 21px;
+        }
     </style>
 </head>
 <body>
@@ -90,9 +136,12 @@ alert("다시 확인 후 시도하세요.");
         <div id="login-header-container">
             <h1 id="main-name">회원가입</h1>
         </div>
-        <form id="register-box-container" action="member" method="post">
+        <form id="register-box-container" action="member" method="post" onSubmit="isSubmit();return false">
             <div class="register-box-row">
-                <label>ID</label><input type="text" name="id" class="form-control" required>
+            	<div class="register-box-row-id">
+                	<label>ID</label><button type="button" id="id-check-btn" class="btn btn-xs btn-info" onclick="idCheck()">중복체크</button>
+                </div>
+                <input type="text" id="id" name="id" class="form-control" check_result="fail" required>
             </div>
             <div class="register-box-row">
                 <label>PASSWORD</label><input type="password" name="password" class="form-control" required>
