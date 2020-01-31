@@ -43,6 +43,9 @@ public class HomeController {
 	public String login(Locale locale, Model model) {
 		return "login";
 	}
+	
+
+	
 }
 
 
