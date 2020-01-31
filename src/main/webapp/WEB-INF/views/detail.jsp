@@ -69,20 +69,6 @@
 			});
 		}
 		function modifyReviewBtn(rno){
-			
-			/* $(document).on("click","#modify-review",function(){
-    		str = "";
-    		str += "<div style='display: flex;justify-content: space-between;'>";
-    		str += "<textarea style='width:88%' class='form-control' id='econtent'></textarea>";
-    		str += "<button style='width:10%' class='btn btn-info' onclick='updateReview()'>작성</button>";
-    		str += "</div>";
-    		console.log('content'+$(this).attr('name'));
-    		console.log($('#content'+$(this).attr('name')));
-    		var original = $('#content'+$(this).attr('name')).text();
-    		console.log(original)
-    		$('#content'+$(this).attr('name')).html(str);
-    		$('#econtent').val(original);
-    	}); */
     	
     		var originalData = $('#content' + rno).text();
     		$('div.delete-modify').css('display', 'none');	
@@ -92,7 +78,7 @@
     		}
     		console.log(param)
     		str = "<textarea class='form-control' id='econtent'></textarea>";
-    		str += "<div style='display:flex; justify-content:flex-end;'><span class='dm-hover' onclick='doModify(" + rno + ")'><i class='fas fa-check' /></span><span class='dm-hover' onclick='undoModify("+param+")'><i class='fas fa-undo'></i></span></div>"
+    		str += "<div style='display:flex; justify-content:flex-end;'><span class='dm-hover' onclick='doModify(" + rno + ")'><i class='fas fa-check' /></span><span class='dm-hover' onclick='undoModify("+rno+ ",\"" +originalData+"\")'><i class='fas fa-undo'></i></span></div>"
     		
     		$('#content'+ rno).html(str);
     		$('#econtent').val(originalData);
@@ -115,9 +101,10 @@
 				}	
 			});
 		}
-		function undoModify(param){
-			$("#content"+ param.rno).empty();
-			$("#content"+ param.rno).text(param.data);
+		function undoModify(rno, data){
+			console.log(rno, data)
+			$("#content"+ rno).empty();
+			$("#content"+ rno).text(data);
 			$("div.delete-modify").css("display", "flex");
 		}
 		function drawReview(data){ 
