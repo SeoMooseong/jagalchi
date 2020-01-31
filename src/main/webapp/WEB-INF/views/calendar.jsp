@@ -175,7 +175,7 @@ alert('로그인 후 이용가능합니다.');
                         	console.log(data)
                         	for(i = 0; i < data.length; i++){
                                 tmp = $('#' + data[i].examstartdt);
-                                tmp.append("<div class='" + data[i].jmcd + " calendar-date-onclick'><span data-toggle='modal' data-target='#myModal'>" + data[i].jmfldnm + "</span></div>");
+                                tmp.append("<div class='" + data[i].jmcd + " calendar-date-onclick' data-toggle='modal' data-target='#myModal'>" + data[i].jmfldnm + "</div>");
                             }
                         });
                     }else{
@@ -187,9 +187,9 @@ alert('로그인 후 이용가능합니다.');
                         function(data, status){
                         	for(i = 0; i < data.length; i++){
                                 tmp = $('#' + data[i].examregstartdt);
-                                tmp.append("<div class='" + data[i].jmcd + " calendar-date-onclick'><span data-toggle='modal' data-target='#myModal'>" + data[i].jmfldnm + "</span></div>");
+                                tmp.append("<div class='" + data[i].jmcd + " calendar-date-onclick' data-toggle='modal' data-target='#myModal'>" + data[i].jmfldnm + "</div>");
                                 tmp = $('#' + data[i].examregenddt);
-                                tmp.append("<div class='" + data[i].jmcd + " calendar-date-onclick'><span data-toggle='modal' data-target='#myModal'>" + data[i].jmfldnm + "</span></div>");
+                                tmp.append("<div class='" + data[i].jmcd + " calendar-date-onclick' data-toggle='modal' data-target='#myModal'>" + data[i].jmfldnm + "</div>");
                             }
                         });
                         
@@ -333,6 +333,7 @@ alert('로그인 후 이용가능합니다.');
     				$('.modal-title').html(data[0].jmfldnm);
     				
     				getStatistics();
+    				start();
     			})
     			
     		});
@@ -346,9 +347,9 @@ alert('로그인 후 이용가능합니다.');
 				if(e.keyCode == 13){
     				insertReview();
     			}
-			})
-        	
-    		//$("#mydiv").load("selectCertiByDate",sv);
+			});
+        	$('.close').on("click", closeButton);
+        	//$('#myModal').modal({backdrop: 'static', keyboard: false}) ;
     	}
     	//$(init);
     </script>
@@ -409,7 +410,7 @@ alert('로그인 후 이용가능합니다.');
         .calendar-month-row-data{
         	font-size:11px;
         }
-        .calendar-date-onclick span{
+        .calendar-date-onclick{
         	cursor: pointer;
         }
         #logout{

@@ -90,8 +90,8 @@ public class CertificateController {
 		}
 		
 		for(int i = 0 ; i < cdtos.size() ; i++) {
-			cdtos.get(i).setPilColor("#555555");
-			cdtos.get(i).setSilColor("#999999");
+			cdtos.get(i).setPilColor("#4072B3");
+			cdtos.get(i).setSilColor("#AEC4E5");
 			System.out.println(cdtos.get(i));
 		}  
 		return cdtos;  

@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,7 +72,7 @@ public class ReviewController {
 		String rcontent = request.getParameter("rcontent");
 		
 		int result = reviewDAO.updateReview(rno, rcontent);
-
+		
 		if(result != 0) {
 			reviews = reviewDAO.selectAllReview(rjmcd);
 		}
@@ -94,5 +96,30 @@ public class ReviewController {
 		}
 		
 		return reviews;
+	}
+	
+	
+	@RequestMapping(value = "/review_sse", method = RequestMethod.GET)
+	public String review_sse(HttpServletRequest request, Model model) {
+		
+		String rjmcd = request.getParameter("rjmcd");
+		System.out.println("review_sse : " + rjmcd);
+		
+		ArrayList<ReviewModel> list = reviewDAO.selectAllReview(rjmcd);
+		
+		JSONArray jarr = new JSONArray();
+		
+		for(int i = 0 ; i < list.size() ; i++) {
+			JSONObject jo = new JSONObject();
+			jo.put("rjmcd", list.get(i).getRjmcd());
+			jo.put("rid", list.get(i).getRid());
+			jo.put("rno", list.get(i).getRno());
+			jo.put("rcontent", list.get(i).getRcontent());
+			jo.put("rdate", list.get(i).getRdate());
+			jarr.add(jo);
+		}
+		
+		model.addAttribute("jarr", jarr);
+		return "review_sse";
 	}
 }

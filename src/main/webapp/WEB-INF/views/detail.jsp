@@ -3,7 +3,26 @@
 <header>
 	<script src="https://www.gstatic.com/charts/loader.js"></script>
 	<script type="text/javascript">
-	
+	var evtSource ;
+	isStart = false;
+	function start() {
+		if(!isStart){
+			isStart = true;
+			evtSource = new EventSource("review_sse?rjmcd="+$('#rjmcd').val());
+			evtSource.onmessage = rcvData
+		}
+	}
+	function stop() {
+		if(isStart){
+			isStart = false;
+			evtSource.close();
+		}
+	}
+	function rcvData(event) {
+		jData = JSON.parse(event.data)
+		console.log(jData);
+		drawReview(jData);
+	};
 	var arr = [];
 		function getStatistics(){
 			
@@ -24,21 +43,17 @@
 				console.log(arr);
 				google.charts.load('current', {'packages':['corechart']});
 	        	google.charts.setOnLoadCallback(drawChart);
+				$('#schedule').scrollTop(0);
 			})
 			
         	
         	$.get('review',{'rjmcd':$('#rjmcd').val()}, function(data){
 				drawReview(data);
+				$('#review').scrollTop($('#review')[0].scrollHeight);
 			})
+
 		}
 		function drawChart() { // array 안에 array를 그려서 chart가 만들어짐
-			/*
-			arr = [["자격증", "필기 합격률",{ role: 'style' }, "실기 합격률",{ role: 'style' }],
-				["정처기", 50, '#b87333', 60, '#b87333'],
-				["정보기", 70, 'black', 80, '#b87333'],
-				["네관", 60, 'black', 20, '#b87333']
-				];
-			*/
 			var data = google.visualization
 			.arrayToDataTable(arr);
 			
@@ -64,7 +79,9 @@
 			$.post("review", data, function(result){
 				drawReview(result);
 				$("#rcontent").val('');
+				$('#review').scrollTop($('#review')[0].scrollHeight);
 			})
+			
 			
 		}
 		function deleteReview(rno){
@@ -110,6 +127,7 @@
 				success: function(result){
 					drawReview(result);
 					$(".delete-modify").css("display", "flex");
+					$('#review').scrollTop($('#review')[0].scrollHeight);
 				},
 				error: function(xhr, status, error) {
 					alert(error);
@@ -136,7 +154,9 @@
 				}
 			}
 			$('#review').html(str);
-			
+		}
+		function closeButton(){
+			stop();
 		}
 		
 	</script>
@@ -171,7 +191,7 @@
 	</style>
 </header>
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal" id="myModal" role="dialog">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -183,7 +203,7 @@
 					<div class="col-sm-6">
 						<div id="schedule"
 							style="width: 100%; max-height: 250px; overflow-y: auto !important;">
-
+					
 						</div>
 					</div>
 					<div class="col-sm-6">
@@ -212,7 +232,7 @@
 				</div>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-default close" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
