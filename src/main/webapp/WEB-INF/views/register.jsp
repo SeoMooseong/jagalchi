@@ -18,6 +18,7 @@ alert("다시 확인 후 시도하세요.");
     <title>자갈취-자격증 따러 갈 취준생</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Song+Myung|Sunflower:300&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/088b1a9afe.js"></script>
@@ -40,19 +41,14 @@ alert("다시 확인 후 시도하세요.");
             flex-direction: column;
             align-items: center;
             background-color: rgba(255, 255, 255, 0.85);
-            border-radius: 10px;
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
         }
         #main-name{
-            margin-bottom: 0;
-            margin-top: 10px;
-            font-size: 50px;
+            margin-bottom: 15px;
+            margin-top: 20px;
+            font-size: 65px;
             text-align: center;
-        }
-        #main-slogan{
-            margin-top: 0;
-            font-size: 20px;
-            color: #DDDDDD;
-            text-align: center;
+            font-family: 'Song Myung', serif;
         }
         #register-header-container{
             width:70%
@@ -68,19 +64,31 @@ alert("다시 확인 후 시도하세요.");
         .register-button-group{
             display: flex;
             justify-content: space-around;
+            margin-top: 20px;
         }
 
         .register-button{
             width:100px;
+        }
+
+        .btn:active{
+            border: rgba(0, 0, 0, 0) !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .btn:focus{
+            border: rgba(0, 0, 0, 0) !important;
+            outline: none !important;
+            box-shadow: none !important;
         }
     </style>
 </head>
 <body>
 <div id="register-main-container">
     <div id="register-sub-container">
-        <div id="register-header-container">
+        <div id="login-header-container">
             <h1 id="main-name">회원가입</h1>
-            <h5 id="main-slogan">Sign Up</h5>
         </div>
         <form id="register-box-container" action="member" method="post">
             <div class="register-box-row">
@@ -99,8 +107,8 @@ alert("다시 확인 후 시도하세요.");
                 <label>AGE</label><input type="number" name="age" min="0" max="150" class="form-control">
             </div>
             <div class="register-box-row register-button-group">
-                <input type="submit" class="btn btn-default register-button" value="가입">
-                <button type="button" class="btn btn-default register-button"  onclick="location='login'">취소</button>
+                <input type="submit" class="btn btn-default register-button btn-success" value="가입">
+                <button type="button" class="btn btn-default register-button btn-danger"  onclick="location='login'">취소</button>
             </div>
         </form>
     </div>

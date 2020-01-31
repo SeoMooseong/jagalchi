@@ -15,6 +15,7 @@ alert('로그인 후 이용가능합니다.');
     <title>자갈취-자격증 따러 갈 취준생</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Song+Myung|Sunflower:300&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/088b1a9afe.js"></script>
@@ -172,7 +173,6 @@ alert('로그인 후 이용가능합니다.');
                        		"flag" : "1"
                         },
                         function(data, status){
-                        	console.log(data)
                         	for(i = 0; i < data.length; i++){
                                 tmp = $('#' + data[i].examstartdt);
                                 tmp.append("<div class='" + data[i].jmcd + " calendar-date-onclick'><span data-toggle='modal' data-target='#myModal'>" + data[i].jmfldnm + "</span></div>");
@@ -296,14 +296,6 @@ alert('로그인 후 이용가능합니다.');
         
         function init(){
         	$(document).on("click",".calendar-date-onclick",function(){
-    			//1320
-				//$('#schedule').scrollTop(60)
-				//console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-				//console.log(document.getElementById('schedule').scrollTop)
-				//console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-				
-        		//$('#schedule').animate({scrollTop:0}, 'fast');
-    			//document.getElementById('schedule').scrollTop = 0;
 				param = {"code":this.classList.item(0)};
 				code = this.classList.item(0);
     			$.get( "selectCertiByCode" , param, function(data, textStatus, jqXHR){
@@ -315,7 +307,6 @@ alert('로그인 후 이용가능합니다.');
 					}
     				str += '<b>자격구분</b> : ' + data[0].qualgbnm+ '<br><br>';
     				$.each(data, function(idx, val) {
-    					console.log(val.qualgbnm);
     					str += '<h4  style="text-align:center;">' + val.description+'</h4>';
     					str += '<table style="text-align:center;width:100%">';
     					str += '<tr><td>원서접수 시작일자 </td><td>' + moment(val.examregstartdt).format('YYYY-MM-DD')+'</td></tr>';
@@ -326,7 +317,6 @@ alert('로그인 후 이용가능합니다.');
     					str += '<tr><td>합격자 발표 종료일 </td><td>' + moment(val.passstartdt).format('YYYY-MM-DD')+'</td></tr>';
     					str += '</table><br>';
     				});
-    				console.log('str : ' + str)
 
     				$('#schedule').html(str);
     				$('#rjmcd').val(code);
@@ -337,22 +327,25 @@ alert('로그인 후 이용가능합니다.');
     			
     		});
     		
-        	$('#rcontent').keyup(function(e){
+        	$('#rcontent').keydown(function(e){
         		var content = $(this).val();
 				if (content.length > 1000){
 			        alert("최대 1000자까지 입력 가능합니다.");
 			        $(this).val(content.substring(0, 1000));
 			    }
 				if(e.keyCode == 13){
-    				insertReview();
+					if(!e.shiftKey){
+                        insertReview();    
+                    }
     			}
 			})
         	
-    		//$("#mydiv").load("selectCertiByDate",sv);
     	}
-    	//$(init);
     </script>
     <style>
+        .calendar-view{
+
+        }
         .calendar-toolbar{
             display: flex;
             justify-content: space-between;
@@ -407,23 +400,57 @@ alert('로그인 후 이용가능합니다.');
             border: 2px rgba(238, 11, 3, .51) solid !important;
         }
         .calendar-month-row-data{
-        	font-size:11px;
+            font-size:11px;
         }
         .calendar-date-onclick span{
-        	cursor: pointer;
+            cursor: pointer;
+        }
+        #logout-row{
+        	width: 100%;
+        	display: flex;
+        	justify-content: flex-end;
         }
         #logout{
-        	cursor: pointer;
+            cursor: pointer;
+        }
+        #page-header{
+
+        }
+        #main-name{
+            margin-bottom: 0;
+            margin-top: 10px;
+            font-size: 65px;
+            text-align: center;
+            font-family: 'Song Myung', serif;
+        }
+        #main-slogan{
+            margin-top: 0;
+            font-size: 15px;
+            color: #c2c2c2;
+            text-align: center;
+            font-family: 'Sunflower', sans-serif;
+        }
+        .btn:active{
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .btn:focus{
+            outline: none !important;
+            box-shadow: none !important;
         }
     </style>
 </head>
 <body>
 <div class="container">
-    <h1 class="page-header">
-        <i class="fa fa-calendar"></i> 자갈취
-    </h1>
+    <div id="page-header">
+        <h1 id="main-name">자갈취</h1>
+        <h5 id="main-slogan">자격증 따러 갈 취준생</h5>
+    </div>
     <c:if test="${isLogin != null }">
-		<span onclick="location='logout'" id="logout">로그아웃</span>
+	    <div id="logout-row">
+			<span onclick="location='logout'" id="logout">Logout<i class="fas fa-sign-out-alt" style="margin-left:5px"></i></span>
+		</div>
 	</c:if>
     <div class="calendar" id="calendar">
         <!-- Calendar toolbar -->
@@ -438,7 +465,7 @@ alert('로그인 후 이용가능합니다.');
             </div>
             <div class="calendar-toolbar-date">
                 <!-- Calendar "today" button -->
-                <button data-toggle="calendar" data-action="today" class="btn btn-default">
+                <button data-toggle="calendar" data-action="today" class="btn btn-default btn-danger">
                     Today
                 </button>
                 <!-- Calendar "prev" button -->
@@ -450,7 +477,7 @@ alert('로그인 후 이용가능합니다.');
                      data-day-format="MM/DD/YYYY"
                      data-week-format="MM/DD/YYYY"
                      data-month-format="MMM, YYYY">
-                    (placeholder)
+                    (Loading...)
                 </div>
                 <!-- Calendar "next" button -->
                 <button data-toggle="calendar" data-action="next" class="btn btn-default">

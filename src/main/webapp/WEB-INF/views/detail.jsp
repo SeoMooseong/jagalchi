@@ -21,7 +21,6 @@
 					brr.push(data[i].silColor);
 					arr.push(brr);
 				}
-				console.log(arr);
 				google.charts.load('current', {'packages':['corechart']});
 	        	google.charts.setOnLoadCallback(drawChart);
 			})
@@ -57,6 +56,15 @@
 	    }
 		
 		function insertReview(){
+			var content = $('#rcontent').val();
+			content = content.replace(/\s+$/g, "");
+			content = content.replace(/\r/g, "");
+
+			if (content.length <= 0){
+		        alert("글자를 입력하세요.");
+		        $('#rcontent').val(content.substring(0, 0));
+		        return;
+		    }
 			data = { "rjmcd" :$("#rjmcd").val(),
 			 "rdate" :  moment(new Date()).format('YYYYMMDD'),
 			 "rcontent" : $("#rcontent").val()}
@@ -91,7 +99,6 @@
     			rno : rno,
     			data : originalData
     		}
-    		console.log(param)
     		str = "<textarea class='form-control' id='econtent'></textarea>";
     		str += "<div style='display:flex; justify-content:flex-end;'><span class='dm-hover' onclick='doModify(" + rno + ")'><i class='fas fa-check' /></span><span class='dm-hover' onclick='undoModify("+rno+ ",\"" +originalData+"\")'><i class='fas fa-undo'></i></span></div>"
     		
@@ -117,7 +124,6 @@
 			});
 		}
 		function undoModify(rno, data){
-			console.log(rno, data)
 			$("#content"+ rno).empty();
 			$("#content"+ rno).text(data);
 			$("div.delete-modify").css("display", "flex");
@@ -128,7 +134,7 @@
 			str = "";
 			for(i = 0 ; i < data.length ; i++){
 				str += "<hr class='boundary'>";
-				str += "<div class='id-date'><b>"+data[i].rid+"</b><span style='float: right;'>"+moment(data[i].rdate).format('YYYY-MM-DD')+"</span></div>";
+				str += "<div class='id-date'><b>"+data[i].rid+"</b><span style='float: right; margin-right:5px;'>"+moment(data[i].rdate).format('YYYY-MM-DD')+"</span></div>";
 				str += "<div id='content"+data[i].rno+"'>"+data[i].rcontent+"</div>";
 				if("${isLogin.id}"  == data[i].rid ){
 					str += "<div class='delete-modify'><span class='dm-hover' onclick='modifyReviewBtn("+data[i].rno+")'><i class='fas fa-eraser' />수정</span><span class='dm-hover' onclick='deleteReview("+data[i].rno+")'><i class='far fa-trash-alt' />삭제</span></div>"
@@ -155,7 +161,8 @@
 	}
 	.dm-hover{
 		color:gray;
-		font-size: 12px;
+		font-size: 15px;
+		margin-right:5px;
 		margin-left:5px;
 	}
 	p {
@@ -193,7 +200,7 @@
 				<hr>
 				<div class="row">
 					<div class="col-sm-1"></div>
-					<div class="col-sm-10">
+					<div class="col-sm-10 container">
 						<h3>후기</h3>
 						<div id="review">
 						
@@ -201,9 +208,9 @@
 						</div>
 						<hr>
 						<b>댓글 작성</b><br>
-						<div style="display: flex;justify-content: space-between;">
-							<textarea style="width:88%" class="form-control" id="rcontent"></textarea>
-							<button style="width:10%" class="btn btn-info" onclick="insertReview()">작성</button>
+						<div class="row" style="display: flex;justify-content: space-between;">
+							<textarea class="form-control col-xs-9" id="rcontent"></textarea>
+							<button class="btn btn-success col-xs-2" onclick="insertReview()">작성</button>
 						</div>
 						<input type="hidden" id="rjmcd">
 

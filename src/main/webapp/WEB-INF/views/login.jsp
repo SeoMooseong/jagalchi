@@ -22,6 +22,7 @@ alert("ID/PW를 다시 확인하세요.");
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://kit.fontawesome.com/088b1a9afe.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Song+Myung|Sunflower:300&display=swap" rel="stylesheet">
     <script>
     </script>
     <style>
@@ -40,19 +41,22 @@ alert("ID/PW를 다시 확인하세요.");
             flex-direction: column;
             align-items: center;
             background-color: rgba(255, 255, 255, 0.85);
-            border-radius: 10px;
+            /*border-radius: 10px;*/
+            box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
         }
         #main-name{
             margin-bottom: 0;
             margin-top: 10px;
-            font-size: 70px;
+            font-size: 65px;
             text-align: center;
+            font-family: 'Song Myung', serif;
         }
         #main-slogan{
             margin-top: 0;
-            font-size: 20px;
-            color: #DDDDDD;
+            font-size: 15px;
+            color: #c2c2c2;
             text-align: center;
+            font-family: 'Sunflower', sans-serif;
         }
         #login-header-container, #login-box-container{
             width:60%
@@ -63,11 +67,54 @@ alert("ID/PW를 다시 확인하세요.");
         }
 
         .login-button-group{
-            display: flex;
-            justify-content: space-around;
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
         .login-button{
-            width: 100px;
+            width: 100%;
+            background-color: cornflowerblue;
+            color: white;
+            border: rgba(0, 0, 0, 0);
+            margin-bottom: 5px;
+        }
+        .login-button:hover{
+            background-color: rgba(100, 149, 237, 0.8);
+            border: rgba(0, 0, 0, 0) !important;
+            color: white;
+        }
+
+        .login-button:active{
+            background-color: rgba(100, 149, 237, 0.6) !important;
+            color: white !important ;
+        }
+
+        .login-button:focus{
+            background-color: rgba(100, 149, 237, 0.6) !important;
+            color: white !important ;
+        }
+
+        .btn:active{
+            border: rgba(0, 0, 0, 0) !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        .btn:focus{
+            border: rgba(0, 0, 0, 0) !important;
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        #login-register-text{
+            color: #c2c2c2;
+        }
+        #login-register-btn{
+            color: #54dc59;
+            cursor: pointer;
+        }
+        #login-register-text{
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -87,7 +134,7 @@ alert("ID/PW를 다시 확인하세요.");
             </div>
             <div class="login-box-row login-button-group">
                 <input type="submit" class="btn btn-default login-button" value="로그인">
-                <button type="button" class="btn btn-default login-button" onclick="location='register'">회원가입</button>
+                <div><span id="login-register-text">Not registered?</span><span id="login-register-btn" onclick="location='register'">Create an account</span></div>
             </div>
         </form>
     </div>
