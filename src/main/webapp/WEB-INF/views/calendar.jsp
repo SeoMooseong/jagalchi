@@ -334,22 +334,20 @@ alert('로그인 후 이용가능합니다.');
     				
     				getStatistics();
     			})
+    			
     		});
     		
-        	$(document).on("click","#delete-review",function(){
-        		console.log(this);
-        		deleteReview(this);
-        	});
-        	$(document).on("click","#modify-review",function(){
-        		str = "";
-        		str += "<div style='display: flex;justify-content: space-between;'>";
-        		str += "<textarea style='width:88%' class='form-control' id='rcontent'></textarea>";
-        		str += "<button style='width:10%' class='btn btn-info' onclick='updateReview()'>작성</button>";
-        		str += "</div>";
-        		console.log('content'+$(this).attr('name'));
-        		console.log($('#content'+$(this).attr('name')));
-        		$('#content'+$(this).attr('name')).html(str);
-        	});
+        	$('#rcontent').keyup(function(e){
+        		var content = $(this).val();
+				if (content.length > 1000){
+			        alert("최대 1000자까지 입력 가능합니다.");
+			        $(this).val(content.substring(0, 1000));
+			    }
+				if(e.keyCode == 13){
+    				insertReview();
+    			}
+			})
+        	
     		//$("#mydiv").load("selectCertiByDate",sv);
     	}
     	//$(init);

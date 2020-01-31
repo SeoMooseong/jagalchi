@@ -8,7 +8,7 @@
 		SELECT * FROM review  WHERE rjmcd = #{rjmcd} order by rno
 	</select>
 	<insert id="insertReview"  parameterType="com.spring.jagalchi.model.ReviewModel" >
-		INSERT INTO review values(REVIEW_CNT.NEXTVAL, #{rjmcd}, #{rid}, #{rdate}, #{rcontent})
+		INSERT INTO review values(REVIEW_CNT.NEXTVAL, #{rjmcd}, #{rid}, #{rcontent}, #{rdate})
 	</insert>
 	<delete id="deleteReview" parameterType="int">
 		DELETE FROM review WHERE rno = #{rno}
@@ -16,6 +16,6 @@
 	<update id="updateReview">
 		UPDATE review 
 		SET rcontent = #{rcontent}
-		WHERE rid = #{rid}
+		WHERE rno = #{rno}
 	</update>
 </mapper>
